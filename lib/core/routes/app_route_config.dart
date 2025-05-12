@@ -1,0 +1,57 @@
+import 'package:eroll/core/routes/app_route_names.dart';
+import 'package:eroll/features/attendance/view/attendance_screen.dart';
+import 'package:eroll/features/create_work/view/create_work_screen.dart';
+import 'package:eroll/features/home/view/home_screen.dart';
+import 'package:eroll/features/leave/staff_leave_screen.dart';
+import 'package:eroll/features/onboarding/onboard_screen.dart';
+import 'package:eroll/features/onboarding/splash_screen.dart';
+import 'package:eroll/features/staffs/staffs_screen.dart';
+import 'package:eroll/features/update_work_status_screen.dart';
+import 'package:eroll/features/works/view/works_site_screen.dart';
+import 'package:flutter/material.dart';
+
+class AppRouteConfig {
+  static Route<dynamic> onGenerateRoute(RouteSettings settings) {
+    switch (settings.name) {
+      case AppRouteNames.splashScreen:
+        return MaterialPageRoute(builder: (context) => SplashScreen());
+
+      case AppRouteNames.onboardScreen:
+        return MaterialPageRoute(builder: (context) => OnboardScreen());
+
+      case AppRouteNames.homeScreen:
+        return MaterialPageRoute(builder: (context) => HomeScreen());
+
+      case AppRouteNames.attendanceScreen:
+        return MaterialPageRoute(builder: (context) => AttendanceScreen());
+
+      case AppRouteNames.siteWorksScreen:
+        return MaterialPageRoute(builder: (context) => WorksSiteScreen());
+
+      case AppRouteNames.createWorkScreen:
+        return MaterialPageRoute(builder: (context) => CreateWorkScreen());
+
+      case AppRouteNames.updateWorksScreen:
+        return MaterialPageRoute(
+          builder: (context) => UpdateWorkStatusScreen(),
+        );
+
+      case AppRouteNames.staffsScreen:
+        return MaterialPageRoute(builder: (context) => StaffsScreen());
+
+      case AppRouteNames.staffOnLeaveScreen:
+        return MaterialPageRoute(builder: (context) => StaffLeaveScreen());
+
+      default:
+        return _errorRoute();
+    }
+  }
+
+  static Route<dynamic> _errorRoute() {
+    return MaterialPageRoute(
+      builder: (_) {
+        return Scaffold(body: Center(child: Text('No Routes Found..!')));
+      },
+    );
+  }
+}
