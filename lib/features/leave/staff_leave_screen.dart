@@ -8,12 +8,14 @@ class StaffLeaveScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Leaves')),
-      body: ListView.builder(
-        itemCount: 5,
-        itemBuilder: (context, index) {
-          return StaffOnLeaveTileWidget();
-        },
-        padding: EdgeInsets.only(left: 20, right: 20, bottom: 20),
+      body: SafeArea(
+        child: ListView.builder(
+          itemCount: 5,
+          itemBuilder: (context, index) {
+            return StaffOnLeaveTileWidget();
+          },
+          padding: EdgeInsets.only(left: 20, right: 20, bottom: 20),
+        ),
       ),
     );
   }

@@ -1,3 +1,4 @@
+import 'package:eroll/core/constants/app_colors.dart';
 import 'package:eroll/core/themes/app_text_theme.dart';
 import 'package:eroll/core/themes/appbar_themes.dart';
 import 'package:flutter/material.dart';

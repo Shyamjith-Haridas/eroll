@@ -39,59 +39,61 @@ class _HomeScreenState extends State<HomeScreen> {
         actionsPadding: EdgeInsets.only(right: 10),
       ),
       body: SafeArea(
-        child: SizedBox(
-          width: double.infinity,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              //* Enable this portion later, right now no search functionality
-              // SizedBox(height: 30),
-              // SearchWidget(),
-              SizedBox(height: 40),
-              CustomPaddingWidget(
-                pLeft: 20,
-                pRight: 20,
-                child: Text(
-                  AppTexts.categoriesHeader,
-                  style: Theme.of(context).textTheme.headlineMedium,
+        child: SingleChildScrollView(
+          child: SizedBox(
+            width: double.infinity,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                //* Enable this portion later, right now no search functionality
+                // SizedBox(height: 30),
+                // SearchWidget(),
+                SizedBox(height: 40),
+                CustomPaddingWidget(
+                  pLeft: 20,
+                  pRight: 20,
+                  child: Text(
+                    AppTexts.categoriesHeader,
+                    style: Theme.of(context).textTheme.headlineMedium,
+                  ),
                 ),
-              ),
 
-              SizedBox(height: 15),
-              CustomPaddingWidget(
-                pLeft: 20,
-                child: CategoryCardListWidget(),
-              ), // Main categories cards
+                SizedBox(height: 15),
+                CustomPaddingWidget(
+                  pLeft: 20,
+                  child: CategoryCardListWidget(),
+                ), // Main categories cards
 
-              SizedBox(height: 40),
-              CustomPaddingWidget(
-                pLeft: 20,
-                pRight: 20,
-                child: StaffLeaveHeaderWidget(),
-              ), // Staff leave header
+                SizedBox(height: 40),
+                CustomPaddingWidget(
+                  pLeft: 20,
+                  pRight: 20,
+                  child: StaffLeaveHeaderWidget(),
+                ), // Staff leave header
 
-              CustomPaddingWidget(
-                pLeft: 20,
-                pRight: 20,
-                child: StaffOnLeaveTileWidget(),
-              ), // Stff leave tile
+                CustomPaddingWidget(
+                  pLeft: 20,
+                  pRight: 20,
+                  child: StaffOnLeaveTileWidget(),
+                ), // Stff leave tile
 
-              SizedBox(height: 40),
-              CustomPaddingWidget(
-                pLeft: 20,
-                child: Text(
-                  AppTexts.quickActionsHeader,
-                  style: Theme.of(context).textTheme.headlineMedium,
+                SizedBox(height: 40),
+                CustomPaddingWidget(
+                  pLeft: 20,
+                  child: Text(
+                    AppTexts.quickActionsHeader,
+                    style: Theme.of(context).textTheme.headlineMedium,
+                  ),
                 ),
-              ),
 
-              SizedBox(height: 15),
-              CustomPaddingWidget(
-                pLeft: 20,
-                pRight: 20,
-                child: QaSectionsWidgets(),
-              ), // Quick actions - staffs, payroll report, attendace
-            ],
+                SizedBox(height: 15),
+                CustomPaddingWidget(
+                  pLeft: 20,
+                  pRight: 20,
+                  child: QaSectionsWidgets(),
+                ), // Quick actions - staffs, payroll report, attendace
+              ],
+            ),
           ),
         ),
       ),

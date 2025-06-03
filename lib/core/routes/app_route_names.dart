@@ -1,11 +1,13 @@
 class AppRouteNames {
   static const String splashScreen = 'splash';
   static const String onboardScreen = 'onboard';
+  static const String bottomNavScreen = 'bottom_nav';
   static const String homeScreen = 'home';
   static const String attendanceScreen = 'attendance';
-  static const String siteWorksScreen = 'work-site';
-  static const String createWorkScreen = 'create-work';
-  static const String updateWorksScreen = 'update-work';
-  static const String staffsScreen = 'all-staffs';
-  static const String staffOnLeaveScreen = 'staff-on-leave';
+  static const String siteWorksScreen = 'work_site';
+  static const String createWorkScreen = 'create_work';
+  static const String updateWorksScreen = 'update_work';
+  static const String staffsScreen = 'all_staffs';
+  static const String staffOnLeaveScreen = 'staff_on_leave';
+  static const String createStaffScreen = 'create_staff';
 }

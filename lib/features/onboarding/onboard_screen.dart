@@ -111,7 +111,7 @@ class _OnboardScreenState extends State<OnboardScreen>
                           await ticker.whenComplete(() {
                             Navigator.pushReplacementNamed(
                               context,
-                              AppRouteNames.homeScreen,
+                              AppRouteNames.bottomNavScreen,
                             );
                           });
                         },

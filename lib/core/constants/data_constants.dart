@@ -17,4 +17,6 @@ class DataConstants {
     'Vivaan Joshi',
     'Tanvi Pillai',
   ];
+
+  static List<String> employeeType = ['Full Time', 'Part Time'];
 }
