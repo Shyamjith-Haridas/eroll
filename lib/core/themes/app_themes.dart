@@ -6,7 +6,8 @@ import 'package:flutter/material.dart';
 class AppThemes {
   static ThemeData lightTheme = ThemeData(
     useMaterial3: true,
-    scaffoldBackgroundColor: Color.fromRGBO(248, 247, 251, 1),
+    // scaffoldBackgroundColor: Color.fromRGBO(248, 247, 251, 1),
+    scaffoldBackgroundColor: AppColors.white,
     textTheme: AppTextTheme.textTheme,
     appBarTheme: AppBarThemes.appBarTheme,
   );

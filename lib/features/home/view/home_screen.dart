@@ -1,10 +1,9 @@
 import 'package:eroll/components/custom_padding_widget.dart';
-import 'package:eroll/core/constants/app_texts.dart';
 import 'package:eroll/core/constants/utility_file.dart';
-import 'package:eroll/features/home/view/components/category_card_list_widget.dart';
-import 'package:eroll/features/home/view/components/qa_sections_widgets.dart';
-import 'package:eroll/features/home/view/components/staff_leave_header_widget.dart';
-import 'package:eroll/features/home/view/components/staff_on_leave_tile_widget.dart';
+import 'package:eroll/features/home/view/components/in_progress_title_widget.dart';
+import 'package:eroll/features/home/view/components/in_progress_work_card_widget.dart';
+import 'package:eroll/features/home/view/components/search_widget.dart';
+import 'package:eroll/features/home/view/components/shortcut_menu.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -45,53 +44,41 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                //* Enable this portion later, right now no search functionality
-                // SizedBox(height: 30),
-                // SearchWidget(),
-                SizedBox(height: 40),
+                // Linear Gradient Container
+                SizedBox(height: 30),
                 CustomPaddingWidget(
                   pLeft: 20,
                   pRight: 20,
-                  child: Text(
-                    AppTexts.categoriesHeader,
-                    style: Theme.of(context).textTheme.headlineMedium,
+                  child: SearchWidget(),
+                ),
+                SizedBox(height: 30),
+
+                // InProgress Work Title
+                CustomPaddingWidget(
+                  pLeft: 20,
+                  pRight: 20,
+                  child: InProgressTitleWidget(),
+                ),
+                SizedBox(height: 10),
+
+                // InProgress Work Card
+                SizedBox(
+                  height: 170,
+                  child: ListView.builder(
+                    itemCount: 5,
+                    itemBuilder: (context, index) => InProgressWorkCardWidget(),
+                    scrollDirection: Axis.horizontal,
                   ),
                 ),
+                SizedBox(height: 30),
 
-                SizedBox(height: 15),
-                CustomPaddingWidget(
-                  pLeft: 20,
-                  child: CategoryCardListWidget(),
-                ), // Main categories cards
-
-                SizedBox(height: 40),
+                // Shortcut Menu
                 CustomPaddingWidget(
                   pLeft: 20,
                   pRight: 20,
-                  child: StaffLeaveHeaderWidget(),
-                ), // Staff leave header
-
-                CustomPaddingWidget(
-                  pLeft: 20,
-                  pRight: 20,
-                  child: StaffOnLeaveTileWidget(),
-                ), // Stff leave tile
-
-                SizedBox(height: 40),
-                CustomPaddingWidget(
-                  pLeft: 20,
-                  child: Text(
-                    AppTexts.quickActionsHeader,
-                    style: Theme.of(context).textTheme.headlineMedium,
-                  ),
+                  child: ShortcutMenu(),
                 ),
-
-                SizedBox(height: 15),
-                CustomPaddingWidget(
-                  pLeft: 20,
-                  pRight: 20,
-                  child: QaSectionsWidgets(),
-                ), // Quick actions - staffs, payroll report, attendace
+                SizedBox(height: 20),
               ],
             ),
           ),

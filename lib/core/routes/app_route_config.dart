@@ -32,7 +32,10 @@ class AppRouteConfig {
         return MaterialPageRoute(builder: (context) => AttendanceScreen());
 
       case AppRouteNames.siteWorksScreen:
-        return MaterialPageRoute(builder: (context) => WorksSiteScreen());
+        final args = settings.arguments as int;
+        return MaterialPageRoute(
+          builder: (context) => WorksSiteScreen(activeIndex: args),
+        );
 
       case AppRouteNames.createWorkScreen:
         return MaterialPageRoute(builder: (context) => CreateWorkScreen());

@@ -1,3 +1,4 @@
+import 'package:eroll/core/constants/app_colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -7,21 +8,22 @@ class SearchWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 20),
+      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
       decoration: BoxDecoration(
-        border: Border.all(color: Colors.black26),
-        borderRadius: BorderRadius.circular(12),
+        color: AppColors.strokeColor,
+        borderRadius: BorderRadius.circular(30),
       ),
       child: Row(
         spacing: 10,
         children: [
-          Icon(CupertinoIcons.search),
+          Icon(CupertinoIcons.search, color: AppColors.grey),
           Expanded(
             child: TextField(
-              readOnly: true,
+              //readOnly: true,
               decoration: InputDecoration(
                 border: InputBorder.none,
-                hintText: 'Search here',
+                hintText: 'Search staff, task',
+                hintStyle: TextStyle(color: AppColors.grey),
               ),
             ),
           ),

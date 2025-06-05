@@ -17,6 +17,7 @@ class AppTexts {
       'Stay on top of your business finances by tracking income and expenses in one convenient dashboard.';
 
   // ---- Home ----//
+  static String inProgressHeader = 'In Progress';
   static String categoriesHeader = 'Categories';
   static String attendaceText = 'Attendance';
   static String worksText = 'Work Sites';

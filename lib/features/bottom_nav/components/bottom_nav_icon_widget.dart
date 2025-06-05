@@ -25,7 +25,13 @@ class BottomNavIconWidget extends StatelessWidget {
             icons,
             color: isActive ? AppColors.primaryColor : AppColors.grey,
           ),
-          Text(label),
+          Text(
+            label,
+            style: TextStyle(
+              color: isActive ? AppColors.primaryColor : AppColors.grey,
+              fontWeight: isActive ? FontWeight.w800 : null,
+            ),
+          ),
         ],
       ),
     );

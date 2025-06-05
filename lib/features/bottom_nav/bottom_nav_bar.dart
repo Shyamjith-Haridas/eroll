@@ -28,52 +28,57 @@ class _BottomNavBarState extends State<BottomNavBar> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: screens[currentIndex],
-      bottomNavigationBar: BottomAppBar(
-        color: AppColors.white,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            BottomNavIconWidget(
-              icons: CupertinoIcons.home,
-              label: 'Home',
-              isActive: currentIndex == 0,
-              onTap: () {
-                setState(() {
-                  currentIndex = 0;
-                });
-              },
-            ),
-            BottomNavIconWidget(
-              icons: CupertinoIcons.calendar_badge_plus,
-              label: 'Attendance',
-              isActive: currentIndex == 1,
-              onTap: () {
-                setState(() {
-                  currentIndex = 1;
-                });
-              },
-            ),
-            BottomNavIconWidget(
-              icons: CupertinoIcons.person_2_square_stack,
-              label: 'Staffs',
-              isActive: currentIndex == 2,
-              onTap: () {
-                setState(() {
-                  currentIndex = 2;
-                });
-              },
-            ),
-            BottomNavIconWidget(
-              icons: CupertinoIcons.building_2_fill,
-              label: 'Works',
-              isActive: currentIndex == 3,
-              onTap: () {
-                setState(() {
-                  currentIndex = 3;
-                });
-              },
-            ),
-          ],
+      bottomNavigationBar: Container(
+        decoration: BoxDecoration(
+          border: Border(top: BorderSide(color: AppColors.strokeColor)),
+        ),
+        child: BottomAppBar(
+          color: AppColors.white,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              BottomNavIconWidget(
+                icons: CupertinoIcons.home,
+                label: 'Home',
+                isActive: currentIndex == 0,
+                onTap: () {
+                  setState(() {
+                    currentIndex = 0;
+                  });
+                },
+              ),
+              BottomNavIconWidget(
+                icons: CupertinoIcons.calendar_badge_plus,
+                label: 'Attendance',
+                isActive: currentIndex == 1,
+                onTap: () {
+                  setState(() {
+                    currentIndex = 1;
+                  });
+                },
+              ),
+              BottomNavIconWidget(
+                icons: CupertinoIcons.person_2_square_stack,
+                label: 'Staffs',
+                isActive: currentIndex == 2,
+                onTap: () {
+                  setState(() {
+                    currentIndex = 2;
+                  });
+                },
+              ),
+              BottomNavIconWidget(
+                icons: CupertinoIcons.building_2_fill,
+                label: 'Works',
+                isActive: currentIndex == 3,
+                onTap: () {
+                  setState(() {
+                    currentIndex = 3;
+                  });
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );

@@ -6,7 +6,9 @@ import 'package:eroll/features/works/view/components/works_list_tile_widget.dart
 import 'package:flutter/material.dart';
 
 class WorksSiteScreen extends StatefulWidget {
-  const WorksSiteScreen({super.key});
+  const WorksSiteScreen({super.key, this.activeIndex = 0});
+
+  final int activeIndex;
 
   @override
   State<WorksSiteScreen> createState() => _WorksSiteScreenState();
@@ -20,6 +22,7 @@ class _WorksSiteScreenState extends State<WorksSiteScreen>
   void initState() {
     super.initState();
     tabController = TabController(
+      initialIndex: widget.activeIndex,
       length: DataConstants.workSiteTabNameList.length,
       vsync: this,
     );
