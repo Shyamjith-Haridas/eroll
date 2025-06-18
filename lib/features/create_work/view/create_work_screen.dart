@@ -78,6 +78,7 @@ class _CreateWorkScreenState extends State<CreateWorkScreen> {
                           }
                         });
                       },
+                      activeColor: AppColors.primaryColor,
                     );
                   },
                 ),
@@ -89,7 +90,7 @@ class _CreateWorkScreenState extends State<CreateWorkScreen> {
               onPressed: () {
                 Navigator.pop(ctx);
               },
-              child: Text('Cancel'),
+              child: Text('Cancel', style: TextStyle(color: AppColors.black)),
             ),
             TextButton(
               onPressed: () {
@@ -97,7 +98,10 @@ class _CreateWorkScreenState extends State<CreateWorkScreen> {
                     '${selectedEmployees.length} selected';
                 Navigator.pop(context);
               },
-              child: Text('Ok'),
+              child: Text(
+                'Ok',
+                style: TextStyle(color: AppColors.primaryColor),
+              ),
             ),
           ],
         );
@@ -108,7 +112,15 @@ class _CreateWorkScreenState extends State<CreateWorkScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Create Work')),
+      appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(CupertinoIcons.back),
+        ),
+        title: Text('Create Work', style: TextStyle(fontFamily: 'cabinBold')),
+      ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),

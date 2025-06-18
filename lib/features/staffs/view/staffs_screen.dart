@@ -11,7 +11,9 @@ class StaffsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Staffs'),
+        elevation: 3,
+        scrolledUnderElevation: 5,
+        title: Text('Staffs', style: TextStyle(fontFamily: 'cabinBold')),
         actions: [
           IconButton(
             onPressed: () {
@@ -25,13 +27,14 @@ class StaffsScreen extends StatelessWidget {
       body: SafeArea(
         child: ListView.builder(
           itemCount: 10,
+          shrinkWrap: true,
           itemBuilder: (context, index) {
             return Container(
-              margin: EdgeInsets.only(top: 15),
+              margin: EdgeInsets.only(top: 10),
               padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               decoration: BoxDecoration(
-                color: AppColors.white,
                 borderRadius: BorderRadius.circular(12),
+                border: Border.all(color: AppColors.strokeColor),
               ),
               child: Row(
                 spacing: 15,
@@ -59,12 +62,16 @@ class StaffsScreen extends StatelessWidget {
                   Spacer(),
 
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      //todo: Edit employee details function
+                    },
                     child: Icon(CupertinoIcons.pencil),
                   ),
                   SizedBox(width: 10),
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      //todo: Delete employee function
+                    },
                     child: Icon(CupertinoIcons.delete, color: AppColors.red),
                   ),
                 ],

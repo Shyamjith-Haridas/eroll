@@ -1,3 +1,4 @@
+import 'package:eroll/core/routes/app_route_names.dart';
 import 'package:eroll/features/home/view/components/shortcut_menu_widget.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -13,7 +14,7 @@ class ShortcutMenu extends StatelessWidget {
           icon: CupertinoIcons.person_crop_circle_fill_badge_minus,
           text: 'Leaves',
           onTap: () {
-            //todo: Navigate to leaves screen
+            Navigator.pushNamed(context, AppRouteNames.staffOnLeaveScreen);
           },
         ),
         ShortcutMenuWidget(
@@ -27,14 +28,14 @@ class ShortcutMenu extends StatelessWidget {
           icon: CupertinoIcons.person_crop_circle_badge_plus,
           text: 'Add Staff',
           onTap: () {
-            //todo: Navigate to add staff screen
+            Navigator.pushNamed(context, AppRouteNames.createStaffScreen);
           },
         ),
         ShortcutMenuWidget(
           icon: CupertinoIcons.hammer_fill,
           text: 'Create Work',
           onTap: () {
-            //todo: Navigate to create work screen
+            Navigator.pushNamed(context, AppRouteNames.createWorkScreen);
           },
         ),
       ],

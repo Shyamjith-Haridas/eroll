@@ -21,11 +21,11 @@ class _WorksListTileWidgetState extends State<WorksListTileWidget> {
     switch (widget.tabIndex) {
       case 0:
         workStatus = 'Pending';
-        statusColor = AppColors.blueAccent;
+        statusColor = AppColors.red;
         break;
       case 1:
         workStatus = 'In Progress';
-        statusColor = AppColors.primaryColor;
+        statusColor = AppColors.deepPurple;
         break;
       case 2:
         workStatus = 'Completed';
@@ -50,7 +50,7 @@ class _WorksListTileWidgetState extends State<WorksListTileWidget> {
             clipBehavior: Clip.hardEdge,
             decoration: BoxDecoration(
               color: AppColors.white,
-              border: Border.all(color: AppColors.grey400),
+              border: Border.all(color: AppColors.strokeColor),
               borderRadius: BorderRadius.circular(12),
             ),
             child: Row(
@@ -58,7 +58,7 @@ class _WorksListTileWidgetState extends State<WorksListTileWidget> {
                 // Left Side Color Strip
                 Container(
                   width: 15,
-                  decoration: BoxDecoration(color: AppColors.deepPurple),
+                  decoration: BoxDecoration(color: AppColors.primaryColor),
                 ),
 
                 // Right Side

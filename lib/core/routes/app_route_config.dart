@@ -6,7 +6,10 @@ import 'package:eroll/features/home/view/home_screen.dart';
 import 'package:eroll/features/leave/staff_leave_screen.dart';
 import 'package:eroll/features/onboarding/onboard_screen.dart';
 import 'package:eroll/features/onboarding/splash_screen.dart';
-import 'package:eroll/features/staffs/staffs_screen.dart';
+import 'package:eroll/features/payroll/monthly_payroll/payroll_month_screen.dart';
+import 'package:eroll/features/payroll/staff_payroll_report/view/staff_payroll_report_screen.dart';
+import 'package:eroll/features/payroll/staff_list_payroll/staff_list_payroll_screen.dart';
+import 'package:eroll/features/staffs/view/staffs_screen.dart';
 import 'package:eroll/features/update_work_status_screen.dart';
 import 'package:eroll/features/works/view/works_site_screen.dart';
 import 'package:flutter/material.dart';
@@ -53,6 +56,19 @@ class AppRouteConfig {
 
       case AppRouteNames.createStaffScreen:
         return MaterialPageRoute(builder: (context) => CreateStaffScreen());
+
+      case AppRouteNames.staffListPayrollScreen:
+        return MaterialPageRoute(
+          builder: (context) => StaffListPayrollScreen(),
+        );
+
+      case AppRouteNames.staffPayrollReportScreen:
+        return MaterialPageRoute(
+          builder: (context) => StaffPayrollReportScreen(),
+        );
+
+      case AppRouteNames.payrollMonthListScreen:
+        return MaterialPageRoute(builder: (context) => PayrollMonthScreen());
 
       default:
         return _errorRoute();

@@ -10,4 +10,7 @@ class AppRouteNames {
   static const String staffsScreen = 'all_staffs';
   static const String staffOnLeaveScreen = 'staff_on_leave';
   static const String createStaffScreen = 'create_staff';
+  static const String staffPayrollReportScreen = 'staff_payroll_report';
+  static const String staffListPayrollScreen = 'staff_list_payroll';
+  static const String payrollMonthListScreen = 'payroll_month_list_screen';
 }

@@ -32,7 +32,10 @@ class _WorksSiteScreenState extends State<WorksSiteScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppTexts.workSiteText),
+        title: Text(
+          AppTexts.workSiteText,
+          style: TextStyle(fontFamily: 'cabinBold'),
+        ),
         actionsPadding: EdgeInsets.only(right: 10),
         actions: [
           IconButton(
@@ -50,23 +53,27 @@ class _WorksSiteScreenState extends State<WorksSiteScreen>
               color: AppColors.white,
               child: TabBar(
                 controller: tabController,
+                indicatorColor: AppColors.primaryColor,
+                labelColor: AppColors.primaryColor,
+                unselectedLabelColor: AppColors.grey,
+                indicatorSize: TabBarIndicatorSize.tab,
                 tabs: [
                   Tab(
                     child: Text(
                       DataConstants.workSiteTabNameList[0],
-                      style: TextStyle(fontFamily: 'cabinBold'),
+                      style: TextStyle(fontFamily: 'cabinBold', fontSize: 16),
                     ),
                   ),
                   Tab(
                     child: Text(
                       DataConstants.workSiteTabNameList[1],
-                      style: TextStyle(fontFamily: 'cabinBold'),
+                      style: TextStyle(fontFamily: 'cabinBold', fontSize: 16),
                     ),
                   ),
                   Tab(
                     child: Text(
                       DataConstants.workSiteTabNameList[2],
-                      style: TextStyle(fontFamily: 'cabinBold'),
+                      style: TextStyle(fontFamily: 'cabinBold', fontSize: 16),
                     ),
                   ),
                 ],

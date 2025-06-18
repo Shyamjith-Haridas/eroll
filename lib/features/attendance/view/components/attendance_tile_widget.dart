@@ -32,6 +32,7 @@ class _AttendanceTileWidgetState extends State<AttendanceTileWidget> {
       decoration: BoxDecoration(
         color: AppColors.white,
         borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: AppColors.strokeColor),
       ),
       child: Row(
         spacing: 15,
@@ -55,6 +56,7 @@ class _AttendanceTileWidgetState extends State<AttendanceTileWidget> {
 
           // Toggle
           Switch(
+            activeColor: AppColors.primaryColor,
             inactiveThumbColor: AppColors.red,
             value: value1,
             thumbIcon: thumbIcon,

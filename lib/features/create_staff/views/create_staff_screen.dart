@@ -1,6 +1,7 @@
 import 'package:eroll/components/button_widget.dart';
 import 'package:eroll/core/constants/app_colors.dart';
 import 'package:eroll/core/constants/data_constants.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class CreateStaffScreen extends StatefulWidget {
@@ -16,7 +17,15 @@ class _CreateStaffScreenState extends State<CreateStaffScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Add Staff')),
+      appBar: AppBar(
+        title: Text('Add Staff', style: TextStyle(fontFamily: 'cabinBold')),
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(CupertinoIcons.back),
+        ),
+      ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
@@ -25,9 +34,9 @@ class _CreateStaffScreenState extends State<CreateStaffScreen> {
               // Employee name
               TextField(
                 decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
+                  // border: OutlineInputBorder(
+                  //   borderRadius: BorderRadius.circular(10),
+                  // ),
                   labelText: 'Staff Name',
                 ),
               ),

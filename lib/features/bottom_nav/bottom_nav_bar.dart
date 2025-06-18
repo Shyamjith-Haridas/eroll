@@ -1,7 +1,7 @@
 import 'package:eroll/core/constants/app_colors.dart';
 import 'package:eroll/features/attendance/view/attendance_screen.dart';
 import 'package:eroll/features/home/view/home_screen.dart';
-import 'package:eroll/features/staffs/staffs_screen.dart';
+import 'package:eroll/features/staffs/view/staffs_screen.dart';
 import 'package:eroll/features/works/view/works_site_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
