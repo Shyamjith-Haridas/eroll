@@ -1,7 +1,7 @@
 import 'package:eroll/core/routes/app_route_names.dart';
 import 'package:eroll/features/attendance/view/attendance_screen.dart';
 import 'package:eroll/features/create_staff/views/create_staff_screen.dart';
-import 'package:eroll/features/create_work/view/create_work_screen.dart';
+import 'package:eroll/features/works/create_work/view/create_work_screen.dart';
 import 'package:eroll/features/home/view/home_screen.dart';
 import 'package:eroll/features/leave/staff_leave_screen.dart';
 import 'package:eroll/features/onboarding/onboard_screen.dart';
@@ -10,8 +10,8 @@ import 'package:eroll/features/payroll/monthly_payroll/payroll_month_screen.dart
 import 'package:eroll/features/payroll/staff_payroll_report/view/staff_payroll_report_screen.dart';
 import 'package:eroll/features/payroll/staff_list_payroll/staff_list_payroll_screen.dart';
 import 'package:eroll/features/staffs/view/staffs_screen.dart';
-import 'package:eroll/features/update_work_status_screen.dart';
-import 'package:eroll/features/works/view/works_site_screen.dart';
+import 'package:eroll/features/works/update_work/view/update_work_status_screen.dart';
+import 'package:eroll/features/works/work_site/view/works_site_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../features/bottom_nav/bottom_nav_bar.dart';

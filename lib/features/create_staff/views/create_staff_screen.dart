@@ -3,6 +3,7 @@ import 'package:eroll/core/constants/app_colors.dart';
 import 'package:eroll/core/constants/data_constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class CreateStaffScreen extends StatefulWidget {
   const CreateStaffScreen({super.key});
@@ -32,13 +33,12 @@ class _CreateStaffScreenState extends State<CreateStaffScreen> {
           child: Column(
             children: [
               // Employee name
+              TextField(decoration: InputDecoration(labelText: 'Staff Name')),
+              SizedBox(height: 20),
+
               TextField(
-                decoration: InputDecoration(
-                  // border: OutlineInputBorder(
-                  //   borderRadius: BorderRadius.circular(10),
-                  // ),
-                  labelText: 'Staff Name',
-                ),
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(label: Text('Phone Number')),
               ),
               SizedBox(height: 20),
 

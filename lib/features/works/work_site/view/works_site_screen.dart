@@ -2,7 +2,7 @@ import 'package:eroll/core/constants/app_colors.dart';
 import 'package:eroll/core/constants/app_texts.dart';
 import 'package:eroll/core/constants/data_constants.dart';
 import 'package:eroll/core/routes/app_route_names.dart';
-import 'package:eroll/features/works/view/components/works_list_tile_widget.dart';
+import 'package:eroll/features/works/work_site/view/components/works_list_tile_widget.dart';
 import 'package:flutter/material.dart';
 
 class WorksSiteScreen extends StatefulWidget {
