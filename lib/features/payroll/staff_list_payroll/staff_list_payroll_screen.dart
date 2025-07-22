@@ -36,6 +36,7 @@ class _StaffListPayrollScreenState extends State<StaffListPayrollScreen> {
                 Navigator.pushNamed(
                   context,
                   AppRouteNames.payrollMonthListScreen,
+                  arguments: true,
                 );
               },
               child: Container(

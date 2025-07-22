@@ -1,6 +1,9 @@
 import 'package:eroll/core/routes/app_route_names.dart';
-import 'package:eroll/features/attendance/view/attendance_screen.dart';
+import 'package:eroll/features/attendance/report_attendance/view/attendance_report_screen.dart';
 import 'package:eroll/features/create_staff/views/create_staff_screen.dart';
+import 'package:eroll/features/payroll/add_salary/add_salary_screen.dart';
+import 'package:eroll/features/payroll/monthly_ledger_report/view/monthly_ledger_report.dart';
+import 'package:eroll/features/settings/view/settings_screen.dart';
 import 'package:eroll/features/works/create_work/view/create_work_screen.dart';
 import 'package:eroll/features/home/view/home_screen.dart';
 import 'package:eroll/features/leave/staff_leave_screen.dart';
@@ -14,6 +17,7 @@ import 'package:eroll/features/works/update_work/view/update_work_status_screen.
 import 'package:eroll/features/works/work_site/view/works_site_screen.dart';
 import 'package:flutter/material.dart';
 
+import '../../features/attendance/add_attendance/view/attendance_screen.dart';
 import '../../features/bottom_nav/bottom_nav_bar.dart';
 
 class AppRouteConfig {
@@ -68,8 +72,24 @@ class AppRouteConfig {
         );
 
       case AppRouteNames.payrollMonthListScreen:
-        return MaterialPageRoute(builder: (context) => PayrollMonthScreen());
+        final args = settings.arguments as bool;
+        return MaterialPageRoute(
+          builder: (context) => PayrollMonthScreen(isMonthlyLedgerReport: args),
+        );
 
+      case AppRouteNames.monthlyLedgerReportScreen:
+        return MaterialPageRoute(builder: (context) => MonthlyLedgerReport());
+
+      case AppRouteNames.addSalaryScreen:
+        return MaterialPageRoute(builder: (context) => AddSalaryScreen());
+
+      case AppRouteNames.attendanceReportScreen:
+        return MaterialPageRoute(
+          builder: (context) => AttendanceReportScreen(),
+        );
+
+      case AppRouteNames.settingsScreen:
+        return MaterialPageRoute(builder: (context) => SettingsScreen());
       default:
         return _errorRoute();
     }

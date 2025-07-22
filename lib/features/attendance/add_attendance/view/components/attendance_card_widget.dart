@@ -1,7 +1,8 @@
 import 'package:eroll/core/constants/app_colors.dart';
 import 'package:eroll/core/constants/app_texts.dart';
-import 'package:eroll/features/attendance/view/components/attendance_quick_report_card_widget.dart';
 import 'package:flutter/material.dart';
+
+import 'attendance_quick_report_card_widget.dart';
 
 class AttendanceCardWidget extends StatelessWidget {
   const AttendanceCardWidget({super.key});

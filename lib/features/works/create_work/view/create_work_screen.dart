@@ -122,134 +122,136 @@ class _CreateWorkScreenState extends State<CreateWorkScreen> {
         title: Text('Create Work', style: TextStyle(fontFamily: 'cabinBold')),
       ),
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // work site name field
-              Text('Work Site', style: TextStyle(fontFamily: 'cabinBold')),
-              SizedBox(height: 5),
-              TextField(
-                controller: workSiteController,
-                minLines: 1,
-                decoration: InputDecoration(
-                  filled: true,
-                  fillColor: AppColors.white,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    borderSide: BorderSide(color: AppColors.grey400),
-                  ),
-                ),
-              ),
-              SizedBox(height: 20),
-
-              // description field
-              Text('Description', style: TextStyle(fontFamily: 'cabinBold')),
-              SizedBox(height: 5),
-              TextField(
-                controller: descriptionController,
-                maxLines: 6,
-                decoration: InputDecoration(
-                  filled: true,
-                  fillColor: AppColors.white,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    borderSide: BorderSide(color: AppColors.grey400),
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // work site name field
+                Text('Work Site', style: TextStyle(fontFamily: 'cabinBold')),
+                SizedBox(height: 5),
+                TextField(
+                  controller: workSiteController,
+                  minLines: 1,
+                  decoration: InputDecoration(
+                    filled: true,
+                    fillColor: AppColors.white,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: BorderSide(color: AppColors.grey400),
+                    ),
                   ),
                 ),
-              ),
-              SizedBox(height: 20),
+                SizedBox(height: 20),
 
-              // Start Date
-              Text('Start Date', style: TextStyle(fontFamily: 'cabinBold')),
-              SizedBox(height: 5),
-              TextField(
-                controller: dateTimeController,
-                readOnly: true,
-                onTap: () {
-                  calender();
-                },
-
-                decoration: InputDecoration(
-                  filled: true,
-                  fillColor: AppColors.white,
-                  suffixIcon: Icon(CupertinoIcons.calendar_today),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    borderSide: BorderSide(color: AppColors.grey400),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    borderSide: BorderSide(color: AppColors.grey400),
+                // description field
+                Text('Description', style: TextStyle(fontFamily: 'cabinBold')),
+                SizedBox(height: 5),
+                TextField(
+                  controller: descriptionController,
+                  maxLines: 6,
+                  decoration: InputDecoration(
+                    filled: true,
+                    fillColor: AppColors.white,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: BorderSide(color: AppColors.grey400),
+                    ),
                   ),
                 ),
-              ),
-              SizedBox(height: 20),
+                SizedBox(height: 20),
 
-              // End date
-              Text('End Date', style: TextStyle(fontFamily: 'cabinBold')),
-              SizedBox(height: 5),
-              TextField(
-                controller: dateTimeController,
-                readOnly: true,
-                onTap: () {
-                  calender();
-                },
+                // Start Date
+                Text('Start Date', style: TextStyle(fontFamily: 'cabinBold')),
+                SizedBox(height: 5),
+                TextField(
+                  controller: dateTimeController,
+                  readOnly: true,
+                  onTap: () {
+                    calender();
+                  },
 
-                decoration: InputDecoration(
-                  filled: true,
-                  fillColor: AppColors.white,
-                  suffixIcon: Icon(CupertinoIcons.calendar_today),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    borderSide: BorderSide(color: AppColors.grey400),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    borderSide: BorderSide(color: AppColors.grey400),
-                  ),
-                ),
-              ),
-              SizedBox(height: 20),
-
-              // Add people
-              Text('Add Team', style: TextStyle(fontFamily: 'cabinBold')),
-              SizedBox(height: 5),
-              TextField(
-                readOnly: true,
-                controller: addTeamMemberController,
-                decoration: InputDecoration(
-                  filled: true,
-                  fillColor: AppColors.white,
-                  hintText: 'Select Team Members',
-                  suffixIcon: Icon(CupertinoIcons.person_3_fill),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    borderSide: BorderSide(color: AppColors.grey400),
+                  decoration: InputDecoration(
+                    filled: true,
+                    fillColor: AppColors.white,
+                    suffixIcon: Icon(CupertinoIcons.calendar_today),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: BorderSide(color: AppColors.grey400),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: BorderSide(color: AppColors.grey400),
+                    ),
                   ),
                 ),
-                onTap: showPopup,
-              ),
-              SizedBox(height: 40),
+                SizedBox(height: 20),
 
-              // Button
-              ButtonWidget(
-                btnText: 'Create Work',
-                btnColor: AppColors.primaryColor,
-                btnAction: () {},
-                isLoading: false,
-              ),
-            ],
+                // End date
+                Text('End Date', style: TextStyle(fontFamily: 'cabinBold')),
+                SizedBox(height: 5),
+                TextField(
+                  controller: dateTimeController,
+                  readOnly: true,
+                  onTap: () {
+                    calender();
+                  },
+
+                  decoration: InputDecoration(
+                    filled: true,
+                    fillColor: AppColors.white,
+                    suffixIcon: Icon(CupertinoIcons.calendar_today),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: BorderSide(color: AppColors.grey400),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: BorderSide(color: AppColors.grey400),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 20),
+
+                // Add people
+                Text('Add Team', style: TextStyle(fontFamily: 'cabinBold')),
+                SizedBox(height: 5),
+                TextField(
+                  readOnly: true,
+                  controller: addTeamMemberController,
+                  decoration: InputDecoration(
+                    filled: true,
+                    fillColor: AppColors.white,
+                    hintText: 'Select Team Members',
+                    suffixIcon: Icon(CupertinoIcons.person_3_fill),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: BorderSide(color: AppColors.grey400),
+                    ),
+                  ),
+                  onTap: showPopup,
+                ),
+                SizedBox(height: 40),
+
+                // Button
+                ButtonWidget(
+                  btnText: 'Create Work',
+                  btnColor: AppColors.primaryColor,
+                  btnAction: () {},
+                  isLoading: false,
+                ),
+              ],
+            ),
           ),
         ),
       ),

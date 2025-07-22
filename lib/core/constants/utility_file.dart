@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class UtilityFile {
@@ -14,5 +15,11 @@ class UtilityFile {
   static dynamic formatDateMonthYear(DateTime date) {
     final formattedDate = DateFormat.yMMMMd().format(date);
     return formattedDate;
+  }
+
+  static dynamic showSnackBar(String message, BuildContext context) {
+    return ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(SnackBar(content: Text(message)));
   }
 }

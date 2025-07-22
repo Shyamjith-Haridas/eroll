@@ -1,6 +1,8 @@
 import 'package:eroll/components/custom_back_button_appbar.dart';
 import 'package:eroll/components/custom_title_appbar.dart';
 import 'package:eroll/core/constants/app_colors.dart';
+import 'package:eroll/features/payroll/staff_payroll_report/components/conditions_apply_widget.dart';
+import 'package:eroll/features/payroll/staff_payroll_report/components/salary_sheet_month_title_widget.dart';
 import 'package:flutter/material.dart';
 
 class StaffPayrollReportScreen extends StatefulWidget {
@@ -27,24 +29,14 @@ class _StaffPayrollReportScreenState extends State<StaffPayrollReportScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(height: 40),
-                Row(
-                  children: [
-                    Text('*'),
-                    Text(
-                      'This is a salary sheet of only one month',
-                      style: Theme.of(
-                        context,
-                      ).textTheme.bodySmall!.copyWith(color: Colors.black45),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 12),
-                Text(
-                  'Salary Sheet of June 2025',
-                  style: TextStyle(fontFamily: 'cabinBold', fontSize: 20),
-                ),
+
+                ConditionsApplyWidget(),
                 SizedBox(height: 12),
 
+                SalarySheetMonthTitleWidget(),
+                SizedBox(height: 12),
+
+                Row(children: [Text('Staff  name: '), Text('Shanid P P')]),
                 Row(children: [Text('Phone number: '), Text('9876543210')]),
                 SizedBox(height: 30),
 

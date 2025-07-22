@@ -12,5 +12,9 @@ class AppRouteNames {
   static const String createStaffScreen = 'create_staff';
   static const String staffPayrollReportScreen = 'staff_payroll_report';
   static const String staffListPayrollScreen = 'staff_list_payroll';
-  static const String payrollMonthListScreen = 'payroll_month_list_screen';
+  static const String payrollMonthListScreen = 'payroll_month_list';
+  static const String monthlyLedgerReportScreen = 'monthly_ledger_report';
+  static const String addSalaryScreen = 'add_salary';
+  static const String attendanceReportScreen = 'attendance_report';
+  static const String settingsScreen = 'settings';
 }

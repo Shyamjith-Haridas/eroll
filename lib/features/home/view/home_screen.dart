@@ -37,7 +37,12 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
         actions: [
-          IconButton(icon: Icon(Icons.settings, size: 30), onPressed: () {}),
+          IconButton(
+            icon: Icon(Icons.settings, size: 30),
+            onPressed: () {
+              Navigator.pushNamed(context, AppRouteNames.settingsScreen);
+            },
+          ),
         ],
         actionsPadding: EdgeInsets.only(right: 10),
       ),
@@ -48,8 +53,9 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Linear Gradient Container
                 SizedBox(height: 30),
+
+                // Search
                 CustomPaddingWidget(
                   pLeft: 20,
                   pRight: 20,
@@ -70,8 +76,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   height: 170,
                   child: ListView.builder(
                     itemCount: 5,
+                    shrinkWrap: true,
                     itemBuilder: (context, index) => InProgressWorkCardWidget(),
                     scrollDirection: Axis.horizontal,
+                    padding: EdgeInsets.only(right: 20),
                   ),
                 ),
                 SizedBox(height: 30),
@@ -84,6 +92,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 SizedBox(height: 20),
 
+                // Reports - Section
                 CustomPaddingWidget(
                   pLeft: 20,
                   child: Text(
@@ -93,6 +102,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 SizedBox(height: 10),
 
+                // Payroll Ledger Report
                 ReportCardWidget(
                   imagePath: ResourcePath.payrollImage,
                   labelText: 'Payroll Ledger Report',
@@ -100,18 +110,26 @@ class _HomeScreenState extends State<HomeScreen> {
                     Navigator.pushNamed(
                       context,
                       AppRouteNames.payrollMonthListScreen,
+                      arguments: false,
                     );
                   },
                 ),
                 SizedBox(height: 10),
+
+                // Attendance Report
                 ReportCardWidget(
                   imagePath: ResourcePath.attendanceImage,
                   labelText: 'Attendance Report',
                   onTap: () {
-                    // todo: attendance report screen navigation function
+                    Navigator.pushNamed(
+                      context,
+                      AppRouteNames.attendanceReportScreen,
+                    );
                   },
                 ),
                 SizedBox(height: 10),
+
+                // Staff Payroll Report
                 ReportCardWidget(
                   imagePath: ResourcePath.employeePayrollImage,
                   labelText: 'Staff Payroll Report',
@@ -124,6 +142,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 SizedBox(height: 20),
 
+                // Upcoming Banner - Demo purpose
                 CustomPaddingWidget(
                   pLeft: 20,
                   child: Text(

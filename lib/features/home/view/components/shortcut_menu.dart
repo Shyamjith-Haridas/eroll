@@ -21,7 +21,7 @@ class ShortcutMenu extends StatelessWidget {
           icon: CupertinoIcons.money_dollar_circle,
           text: 'Payroll',
           onTap: () {
-            //todo: Navigate to payroll screen
+            Navigator.pushNamed(context, AppRouteNames.addSalaryScreen);
           },
         ),
         ShortcutMenuWidget(

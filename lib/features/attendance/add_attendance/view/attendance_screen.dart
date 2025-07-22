@@ -4,9 +4,10 @@ import 'package:easy_date_timeline/easy_date_timeline.dart';
 import 'package:eroll/components/button_widget.dart';
 import 'package:eroll/core/constants/app_colors.dart';
 import 'package:eroll/core/constants/app_texts.dart';
-import 'package:eroll/features/attendance/view/components/attendance_card_widget.dart';
-import 'package:eroll/features/attendance/view/components/attendance_tile_widget.dart';
 import 'package:flutter/material.dart';
+
+import 'components/attendance_card_widget.dart';
+import 'components/attendance_tile_widget.dart';
 
 class AttendanceScreen extends StatefulWidget {
   const AttendanceScreen({super.key});

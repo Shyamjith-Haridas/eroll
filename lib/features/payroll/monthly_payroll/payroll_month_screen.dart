@@ -5,7 +5,9 @@ import 'package:eroll/core/routes/app_route_names.dart';
 import 'package:flutter/material.dart';
 
 class PayrollMonthScreen extends StatelessWidget {
-  const PayrollMonthScreen({super.key});
+  const PayrollMonthScreen({super.key, required this.isMonthlyLedgerReport});
+
+  final bool? isMonthlyLedgerReport;
 
   @override
   Widget build(BuildContext context) {
@@ -21,10 +23,17 @@ class PayrollMonthScreen extends StatelessWidget {
           itemBuilder: (context, index) {
             return GestureDetector(
               onTap: () {
-                Navigator.pushNamed(
-                  context,
-                  AppRouteNames.staffPayrollReportScreen,
-                );
+                if (isMonthlyLedgerReport!) {
+                  Navigator.pushNamed(
+                    context,
+                    AppRouteNames.staffPayrollReportScreen,
+                  );
+                } else {
+                  Navigator.pushNamed(
+                    context,
+                    AppRouteNames.monthlyLedgerReportScreen,
+                  );
+                }
               },
               child: CustomTileBorderWidget(child: Text('Month ${index + 1}')),
             );

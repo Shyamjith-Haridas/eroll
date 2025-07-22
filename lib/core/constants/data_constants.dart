@@ -19,4 +19,6 @@ class DataConstants {
   ];
 
   static List<String> employeeType = ['Full Time', 'Part Time'];
+
+  static List<String> salaryType = ['Advance', 'Net Salary'];
 }

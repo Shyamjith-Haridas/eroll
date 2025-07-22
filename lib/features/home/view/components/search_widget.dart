@@ -20,8 +20,10 @@ class SearchWidget extends StatelessWidget {
           Expanded(
             child: TextField(
               //readOnly: true,
+              cursorColor: AppColors.primaryColor,
               decoration: InputDecoration(
                 border: InputBorder.none,
+                focusedBorder: InputBorder.none,
                 hintText: 'Search staff, task',
                 hintStyle: TextStyle(color: AppColors.grey),
               ),
