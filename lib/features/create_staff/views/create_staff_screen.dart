@@ -1,8 +1,11 @@
 import 'package:eroll/components/button_widget.dart';
 import 'package:eroll/core/constants/app_colors.dart';
 import 'package:eroll/core/constants/data_constants.dart';
+import 'package:eroll/core/constants/utility_file.dart';
+import 'package:eroll/features/create_staff/provider/create_staff_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class CreateStaffScreen extends StatefulWidget {
   const CreateStaffScreen({super.key});
@@ -13,6 +16,8 @@ class CreateStaffScreen extends StatefulWidget {
 
 class _CreateStaffScreenState extends State<CreateStaffScreen> {
   String? selectedValue;
+  final nameController = TextEditingController();
+  final mobileController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -32,11 +37,15 @@ class _CreateStaffScreenState extends State<CreateStaffScreen> {
           child: Column(
             children: [
               // Employee name
-              TextField(decoration: InputDecoration(labelText: 'Staff Name')),
+              TextField(
+                controller: nameController,
+                decoration: InputDecoration(labelText: 'Staff Name'),
+              ),
               SizedBox(height: 20),
 
               // Employee phone number
               TextField(
+                controller: mobileController,
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(label: Text('Phone Number')),
               ),
@@ -84,13 +93,28 @@ class _CreateStaffScreenState extends State<CreateStaffScreen> {
               SizedBox(height: 20),
 
               // Create button
-              ButtonWidget(
-                btnText: 'Create',
-                btnColor: AppColors.primaryColor,
-                btnAction: () {
-                  //todo: create staff function
+              Consumer<CreateStaffProvider>(
+                builder: (context, createStaffProvider, _) {
+                  return ButtonWidget(
+                    btnText: 'Create',
+                    btnColor: AppColors.primaryColor,
+                    isLoading: createStaffProvider.isLoading,
+                    btnAction: () async {
+                      await createStaffProvider.addStaff(
+                        name: nameController.text.trim(),
+                        mobile: mobileController.text.trim(),
+                        empType: selectedValue ?? '',
+                      );
+
+                      if (!mounted) return;
+                      UtilityFile.showSnackBar(
+                        'Staff added successfully',
+                        context,
+                      );
+                      Navigator.pop(context);
+                    },
+                  );
                 },
-                isLoading: false,
               ),
             ],
           ),
