@@ -5,6 +5,7 @@ class ResourcePath {
   static String attendanceImage = 'lib/assets/images/attendance.png';
   static String bannerImage = 'lib/assets/images/travek-banner.jpg';
   static String employeePayrollImage = 'lib/assets/images/employee_graph.png';
+  static String emptyListImage = 'lib/assets/images/empty-staff.jpg';
 
   // ---- Json Path ----//
   static String splashJsonPath = 'lib/assets/json/splash.json';

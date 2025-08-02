@@ -1,5 +1,6 @@
 import 'package:eroll/core/routes/app_route_names.dart';
 import 'package:eroll/features/attendance/report_attendance/view/attendance_report_screen.dart';
+import 'package:eroll/features/create_staff/model/create_staff_model.dart';
 import 'package:eroll/features/create_staff/views/create_staff_screen.dart';
 import 'package:eroll/features/payroll/add_salary/add_salary_screen.dart';
 import 'package:eroll/features/payroll/monthly_ledger_report/view/monthly_ledger_report.dart';
@@ -59,7 +60,20 @@ class AppRouteConfig {
         return MaterialPageRoute(builder: (context) => StaffLeaveScreen());
 
       case AppRouteNames.createStaffScreen:
-        return MaterialPageRoute(builder: (context) => CreateStaffScreen());
+        // Completely safe approach - handle all possible cases
+        final arguments = settings.arguments;
+
+        return MaterialPageRoute(
+          builder: (context) {
+            // Check if we have valid staff data for editing
+            if (arguments != null && arguments is CreateStaffModel) {
+              return CreateStaffScreen(isEditMode: true, staffData: arguments);
+            }
+
+            // Default to create mode (new staff)
+            return CreateStaffScreen(isEditMode: false, staffData: null);
+          },
+        );
 
       case AppRouteNames.staffListPayrollScreen:
         return MaterialPageRoute(

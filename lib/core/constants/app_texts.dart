@@ -36,4 +36,8 @@ class AppTexts {
   // ---- Button Text ----//
   static String submitText = 'Submit';
   static String continueText = 'Continue';
+
+  // ---- Snack bar messages ----//
+  static String emptyStaffText =
+      'Looks a bit empty here. Add your first staff member!';
 }
