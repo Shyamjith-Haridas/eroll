@@ -1,3 +1,4 @@
+import 'package:eroll/features/works/create_work/provider/create_work_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
 
@@ -9,6 +10,7 @@ class AppProviders {
     return [
       ChangeNotifierProvider(create: (_) => CreateStaffProvider()),
       ChangeNotifierProvider(create: (_) => ViewStaffProvider()),
+      ChangeNotifierProvider(create: (_) => CreateWorkProvider()),
     ];
   }
 }

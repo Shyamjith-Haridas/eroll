@@ -1,9 +1,13 @@
 import 'package:eroll/components/button_widget.dart';
 import 'package:eroll/core/constants/app_colors.dart';
-import 'package:eroll/core/constants/data_constants.dart';
 import 'package:eroll/core/constants/utility_file.dart';
+import 'package:eroll/features/works/create_work/provider/create_work_provider.dart';
+import 'package:eroll/features/works/create_work/validators/input_validators.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import 'components/custom_form_label.dart';
 
 class CreateWorkScreen extends StatefulWidget {
   const CreateWorkScreen({super.key});
@@ -13,100 +17,26 @@ class CreateWorkScreen extends StatefulWidget {
 }
 
 class _CreateWorkScreenState extends State<CreateWorkScreen> {
-  DateTime? selectedDate;
   final workSiteController = TextEditingController();
   final descriptionController = TextEditingController();
-  final dateTimeController = TextEditingController();
-  final addTeamMemberController = TextEditingController();
-
-  int selectedCount = 0;
-  List<String> selectedEmployees = [];
 
   @override
   void initState() {
     super.initState();
-    selectedDate = DateTime.now();
-    dateTimeController.text = UtilityFile.formatDateMonthYear(selectedDate!);
+
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      Provider.of<CreateWorkProvider>(
+        context,
+        listen: false,
+      ).fetchStaffs(context);
+    });
   }
 
-  Future<void> calender() async {
-    final DateTime? dateObject = await showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(2025),
-      lastDate: DateTime(2100),
-    );
-
-    if (dateObject != null) {
-      setState(() {
-        selectedDate = dateObject;
-        dateTimeController.text = UtilityFile.formatDateMonthYear(
-          selectedDate!,
-        );
-      });
-    }
-  }
-
-  void showPopup() {
-    showDialog(
-      context: context,
-      builder: (ctx) {
-        return AlertDialog(
-          backgroundColor: AppColors.white,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
-          ),
-          content: StatefulBuilder(
-            builder: (context, setState) {
-              return SizedBox(
-                width: MediaQuery.of(ctx).size.width * 0.8,
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: DataConstants.checkListEmployees.length,
-                  itemBuilder: (context, index) {
-                    final emp = DataConstants.checkListEmployees[index];
-
-                    return CheckboxListTile(
-                      title: Text(emp),
-                      value: selectedEmployees.contains(emp),
-                      onChanged: (value) {
-                        setState(() {
-                          if (value == true) {
-                            selectedEmployees.add(emp);
-                          } else {
-                            selectedEmployees.remove(emp);
-                          }
-                        });
-                      },
-                      activeColor: AppColors.primaryColor,
-                    );
-                  },
-                ),
-              );
-            },
-          ),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.pop(ctx);
-              },
-              child: Text('Cancel', style: TextStyle(color: AppColors.black)),
-            ),
-            TextButton(
-              onPressed: () {
-                addTeamMemberController.text =
-                    '${selectedEmployees.length} selected';
-                Navigator.pop(context);
-              },
-              child: Text(
-                'Ok',
-                style: TextStyle(color: AppColors.primaryColor),
-              ),
-            ),
-          ],
-        );
-      },
-    );
+  @override
+  void dispose() {
+    workSiteController.dispose();
+    descriptionController.dispose();
+    super.dispose();
   }
 
   @override
@@ -114,9 +44,7 @@ class _CreateWorkScreenState extends State<CreateWorkScreen> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
+          onPressed: () => Navigator.pop(context),
           icon: Icon(CupertinoIcons.back),
         ),
         title: Text('Create Work', style: TextStyle(fontFamily: 'cabinBold')),
@@ -129,9 +57,9 @@ class _CreateWorkScreenState extends State<CreateWorkScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 // work site name field
-                Text('Work Site', style: TextStyle(fontFamily: 'cabinBold')),
+                CustomFormLabel(labelText: 'Work Site'),
                 SizedBox(height: 5),
-                TextField(
+                TextFormField(
                   controller: workSiteController,
                   minLines: 1,
                   decoration: InputDecoration(
@@ -145,11 +73,12 @@ class _CreateWorkScreenState extends State<CreateWorkScreen> {
                       borderSide: BorderSide(color: AppColors.grey400),
                     ),
                   ),
+                  validator: InputValidators.validateName,
                 ),
                 SizedBox(height: 20),
 
                 // description field
-                Text('Description', style: TextStyle(fontFamily: 'cabinBold')),
+                CustomFormLabel(labelText: 'Description', isMandatory: false),
                 SizedBox(height: 5),
                 TextField(
                   controller: descriptionController,
@@ -169,92 +98,191 @@ class _CreateWorkScreenState extends State<CreateWorkScreen> {
                 SizedBox(height: 20),
 
                 // Start Date
-                Text('Start Date', style: TextStyle(fontFamily: 'cabinBold')),
+                CustomFormLabel(labelText: 'Start Date'),
                 SizedBox(height: 5),
-                TextField(
-                  controller: dateTimeController,
-                  readOnly: true,
-                  onTap: () {
-                    calender();
-                  },
+                Consumer<CreateWorkProvider>(
+                  builder:
+                      (context, workProvider, _) => GestureDetector(
+                        onTap: () async {
+                          final selectDate = await showDatePicker(
+                            context: context,
+                            firstDate: DateTime(2025),
+                            lastDate: DateTime(2100),
+                            currentDate: DateTime.now(),
+                            builder:
+                                (context, child) => Theme(
+                                  data: Theme.of(context).copyWith(
+                                    dialogTheme: DialogThemeData(
+                                      backgroundColor: AppColors.white,
+                                    ),
+                                    colorScheme: ColorScheme.light(
+                                      primary: AppColors.primaryColor,
+                                    ),
+                                  ),
+                                  child: child!,
+                                ),
+                          );
 
-                  decoration: InputDecoration(
-                    filled: true,
-                    fillColor: AppColors.white,
-                    suffixIcon: Icon(CupertinoIcons.calendar_today),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                      borderSide: BorderSide(color: AppColors.grey400),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                      borderSide: BorderSide(color: AppColors.grey400),
-                    ),
-                  ),
-                ),
-                SizedBox(height: 20),
-
-                // End date
-                Text('End Date', style: TextStyle(fontFamily: 'cabinBold')),
-                SizedBox(height: 5),
-                TextField(
-                  controller: dateTimeController,
-                  readOnly: true,
-                  onTap: () {
-                    calender();
-                  },
-
-                  decoration: InputDecoration(
-                    filled: true,
-                    fillColor: AppColors.white,
-                    suffixIcon: Icon(CupertinoIcons.calendar_today),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                      borderSide: BorderSide(color: AppColors.grey400),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                      borderSide: BorderSide(color: AppColors.grey400),
-                    ),
-                  ),
+                          if (selectDate != null) {
+                            workProvider.setStartDate(selectDate);
+                          }
+                        },
+                        child: Container(
+                          height: 55.0,
+                          padding: EdgeInsets.symmetric(horizontal: 10.0),
+                          decoration: BoxDecoration(
+                            border: Border.all(color: AppColors.grey),
+                            borderRadius: BorderRadius.circular(12.0),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                workProvider.startDate != null
+                                    ? UtilityFile.formatDateMonthYear(
+                                      workProvider.startDate!,
+                                    )
+                                    : 'Select start date',
+                              ),
+                              Icon(CupertinoIcons.calendar_today),
+                            ],
+                          ),
+                        ),
+                      ),
                 ),
                 SizedBox(height: 20),
 
                 // Add people
-                Text('Add Team', style: TextStyle(fontFamily: 'cabinBold')),
+                CustomFormLabel(labelText: 'Add Team'),
                 SizedBox(height: 5),
-                TextField(
-                  readOnly: true,
-                  controller: addTeamMemberController,
-                  decoration: InputDecoration(
-                    filled: true,
-                    fillColor: AppColors.white,
-                    hintText: 'Select Team Members',
-                    suffixIcon: Icon(CupertinoIcons.person_3_fill),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                      borderSide: BorderSide(color: AppColors.grey400),
-                    ),
-                  ),
-                  onTap: showPopup,
+                Consumer<CreateWorkProvider>(
+                  builder: (context, provider, _) {
+                    return GestureDetector(
+                      onTap: () => showPopup(),
+                      child: Container(
+                        height: 55.0,
+                        padding: EdgeInsets.symmetric(horizontal: 10.0),
+                        decoration: BoxDecoration(
+                          border: Border.all(color: AppColors.grey),
+                          borderRadius: BorderRadius.circular(12.0),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              provider.selectedTeamMember.isEmpty
+                                  ? "Select Team Members"
+                                  : "${provider.selectedTeamMember.length} member selected",
+                            ),
+                            Icon(CupertinoIcons.person_3_fill),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
                 ),
                 SizedBox(height: 40),
 
                 // Button
-                ButtonWidget(
-                  btnText: 'Create Work',
-                  btnColor: AppColors.primaryColor,
-                  btnAction: () {},
-                  isLoading: false,
+                Consumer<CreateWorkProvider>(
+                  builder:
+                      (context, provider, _) => ButtonWidget(
+                        btnText: 'Create Work',
+                        btnColor: AppColors.primaryColor,
+                        btnAction: () async {
+                          final workSiteName = workSiteController.text.trim();
+                          final description = descriptionController.text;
+
+                          if (workSiteName.isEmpty ||
+                              provider.startDate == null ||
+                              provider.selectedTeamMember.isEmpty) {
+                            UtilityFile.showSnackBar(
+                              'Please fill mandatory fields',
+                              context,
+                            );
+                            return;
+                          }
+
+                          await provider.createWork(
+                            workSiteName: workSiteName,
+                            startDate: provider.startDate!,
+                            teamMembers: provider.selectedTeamMember,
+                          );
+
+                          if (!mounted) return;
+                          UtilityFile.showSnackBar(
+                            'Work created successfully',
+                            context,
+                          );
+                          Navigator.pop(context);
+                        },
+                        isLoading: provider.isLoading,
+                      ),
                 ),
               ],
             ),
           ),
         ),
       ),
+    );
+  }
+
+  void showPopup() async {
+    await showDialog(
+      context: context,
+      builder: (ctx) {
+        final provider = Provider.of<CreateWorkProvider>(
+          context,
+          listen: false,
+        );
+
+        return AlertDialog(
+          backgroundColor: AppColors.white,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+          content: StatefulBuilder(
+            builder: (context, setState) {
+              return Consumer<CreateWorkProvider>(
+                builder: (context, value, child) {
+                  return SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.8,
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: provider.staffsList.length,
+                      itemBuilder: (context, index) {
+                        final staff = provider.staffsList[index];
+
+                        return CheckboxListTile(
+                          title: Text(staff.name),
+                          value: provider.isStaffMemberSelected(staff),
+                          onChanged: (value) {
+                            provider.selectStaffMember(staff);
+                          },
+                          activeColor: AppColors.primaryColor,
+                        );
+                      },
+                    ),
+                  );
+                },
+              );
+            },
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text('Cancel', style: TextStyle(color: AppColors.black)),
+            ),
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text(
+                'Ok',
+                style: TextStyle(color: AppColors.primaryColor),
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 }

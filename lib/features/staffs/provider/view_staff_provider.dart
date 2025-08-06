@@ -6,10 +6,9 @@ import 'package:flutter/cupertino.dart';
 
 class ViewStaffProvider extends ChangeNotifier {
   List<CreateStaffModel> _viewStaffList = [];
+  bool _isLoading = false;
 
   List<CreateStaffModel> get viewStaffList => _viewStaffList;
-
-  bool _isLoading = false;
 
   bool get isLoading => _isLoading;
 
