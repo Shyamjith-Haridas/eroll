@@ -1,50 +1,70 @@
 import 'package:eroll/core/constants/app_colors.dart';
+import 'package:eroll/core/constants/enums.dart';
+import 'package:eroll/core/constants/utility_file.dart';
 import 'package:eroll/core/routes/app_route_names.dart';
+import 'package:eroll/features/works/create_work/model/create_work_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class WorksListTileWidget extends StatefulWidget {
-  const WorksListTileWidget({super.key, required this.tabIndex});
+class WorksListTileWidget extends StatelessWidget {
+  final List<CreateWorkModel> works;
+  final String workType;
+
+  const WorksListTileWidget({
+    super.key,
+    required this.tabIndex,
+    required this.works,
+    required this.workType,
+  });
 
   final int tabIndex;
 
   @override
-  State<WorksListTileWidget> createState() => _WorksListTileWidgetState();
-}
-
-class _WorksListTileWidgetState extends State<WorksListTileWidget> {
-  @override
   Widget build(BuildContext context) {
-    String workStatus;
     Color statusColor;
 
-    switch (widget.tabIndex) {
+    switch (tabIndex) {
       case 0:
-        workStatus = 'Pending';
         statusColor = AppColors.red;
         break;
       case 1:
-        workStatus = 'In Progress';
         statusColor = AppColors.deepPurple;
         break;
       case 2:
-        workStatus = 'Completed';
         statusColor = AppColors.green;
         break;
       default:
-        workStatus = '';
         statusColor = Colors.black;
     }
 
+    if (works.isEmpty) {
+      return Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset('lib/assets/images/empty-list.jpg', height: 250),
+              Text(
+                'No $workType Works, Complete some works to see them here.',
+                textAlign: TextAlign.center,
+              ),
+            ],
+          ),
+        ),
+      );
+    }
+
     return ListView.builder(
-      itemCount: 10,
+      itemCount: works.length,
       itemBuilder: (context, index) {
+        final work = works[index];
+
         return GestureDetector(
           onTap: () {
             Navigator.pushNamed(context, AppRouteNames.updateWorksScreen);
           },
           child: Container(
-            height: 150,
             width: double.infinity,
             margin: EdgeInsets.only(bottom: 15),
             clipBehavior: Clip.hardEdge,
@@ -53,63 +73,71 @@ class _WorksListTileWidgetState extends State<WorksListTileWidget> {
               border: Border.all(color: AppColors.strokeColor),
               borderRadius: BorderRadius.circular(12),
             ),
-            child: Row(
-              children: [
-                // Left Side Color Strip
-                Container(
-                  width: 15,
-                  decoration: BoxDecoration(color: AppColors.primaryColor),
-                ),
+            child: IntrinsicHeight(
+              child: Row(
+                children: [
+                  // Left Side Color Strip
+                  Container(
+                    width: 15,
+                    decoration: BoxDecoration(color: AppColors.primaryColor),
+                  ),
 
-                // Right Side
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(20),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            Icon(CupertinoIcons.calendar_badge_plus, size: 30),
-                            SizedBox(width: 10),
-                            Text(
-                              'April 24, 2025', // Date
-                              style: TextStyle(fontFamily: 'cabinBold'),
-                            ),
-                            Spacer(),
-                            Text('Thursday'), // Day
-                          ],
-                        ),
-                        SizedBox(height: 10),
-
-                        // Work Site name
-                        Text(
-                          'Work Site Name/ Place/ Address',
-                          style: Theme.of(
-                            context,
-                          ).textTheme.headlineLarge!.copyWith(fontSize: 22),
-                        ),
-                        SizedBox(height: 10),
-
-                        // Work Status
-                        Row(
-                          spacing: 10,
-                          children: [
-                            Text('Status:'),
-                            Text(
-                              workStatus,
-                              style: TextStyle(
-                                fontFamily: 'cabinBold',
-                                color: statusColor,
+                  // Right Side
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.all(20),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              Icon(
+                                CupertinoIcons.calendar_badge_plus,
+                                size: 30,
                               ),
-                            ),
-                          ],
-                        ),
-                      ],
+                              SizedBox(width: 10),
+                              Text(
+                                UtilityFile.formatDateMonthYear(
+                                  work.startDate,
+                                ), // Date
+                                style: TextStyle(fontFamily: 'cabinBold'),
+                              ),
+                              Spacer(),
+                              Text(UtilityFile.currentDay(work.startDate)),
+                              // Day
+                            ],
+                          ),
+                          SizedBox(height: 10),
+
+                          // Work Site name
+                          Text(
+                            work.workSiteName,
+                            style: Theme.of(
+                              context,
+                            ).textTheme.headlineLarge!.copyWith(fontSize: 20),
+                          ),
+                          SizedBox(height: 10),
+
+                          // Work Status
+                          Row(
+                            spacing: 10,
+                            children: [
+                              Text('Status:'),
+                              Text(
+                                work.status.label,
+                                style: TextStyle(
+                                  fontFamily: 'cabinBold',
+                                  color: statusColor,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         );

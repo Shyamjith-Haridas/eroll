@@ -16,8 +16,11 @@ class CreateStaffScreen extends StatefulWidget {
   final bool isEditMode;
   final CreateStaffModel? staffData;
 
-  const CreateStaffScreen({Key? key, required this.isEditMode, this.staffData})
-    : super(key: key);
+  const CreateStaffScreen({
+    super.key,
+    required this.isEditMode,
+    this.staffData,
+  });
 
   @override
   State<CreateStaffScreen> createState() => _CreateStaffScreenState();

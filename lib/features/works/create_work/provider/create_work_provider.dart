@@ -63,7 +63,9 @@ class CreateWorkProvider extends ChangeNotifier {
       );
 
       await docRef.set(work.toJson());
+      log('work added with id: ${docRef.id}');
       notifyListeners();
+      await Future.delayed(Duration(seconds: 2));
     } catch (error) {
       log('Error while creating work: $error');
     } finally {

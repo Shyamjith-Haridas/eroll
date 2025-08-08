@@ -1,9 +1,11 @@
 import 'package:eroll/core/constants/app_colors.dart';
 import 'package:eroll/core/constants/app_texts.dart';
-import 'package:eroll/core/constants/data_constants.dart';
+import 'package:eroll/core/constants/enums.dart';
 import 'package:eroll/core/routes/app_route_names.dart';
+import 'package:eroll/features/works/work_site/provider/view_work_site_provider.dart';
 import 'package:eroll/features/works/work_site/view/components/works_list_tile_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class WorksSiteScreen extends StatefulWidget {
   const WorksSiteScreen({super.key, this.activeIndex = 0});
@@ -18,14 +20,27 @@ class _WorksSiteScreenState extends State<WorksSiteScreen>
     with SingleTickerProviderStateMixin {
   late TabController tabController;
 
+  List<WorkStatus> tabs = [
+    WorkStatus.pending,
+    WorkStatus.inProgress,
+    WorkStatus.completed,
+  ];
+
   @override
   void initState() {
     super.initState();
     tabController = TabController(
       initialIndex: widget.activeIndex,
-      length: DataConstants.workSiteTabNameList.length,
+      length: tabs.length,
       vsync: this,
     );
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Provider.of<ViewWorkSiteProvider>(
+        context,
+        listen: false,
+      ).fetchCreatedWorks();
+    });
   }
 
   @override
@@ -51,42 +66,70 @@ class _WorksSiteScreenState extends State<WorksSiteScreen>
           children: [
             Container(
               color: AppColors.white,
-              child: TabBar(
-                controller: tabController,
-                indicatorColor: AppColors.primaryColor,
-                labelColor: AppColors.primaryColor,
-                unselectedLabelColor: AppColors.grey,
-                indicatorSize: TabBarIndicatorSize.tab,
-                tabs: [
-                  Tab(
-                    child: Text(
-                      DataConstants.workSiteTabNameList[0],
-                      style: TextStyle(fontFamily: 'cabinBold', fontSize: 16),
+              child: Consumer<ViewWorkSiteProvider>(
+                builder: (context, viewProvider, _) {
+                  return TabBar(
+                    isScrollable: true,
+                    controller: tabController,
+                    indicatorColor: AppColors.primaryColor,
+                    labelColor: AppColors.primaryColor,
+                    labelStyle: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w700,
                     ),
-                  ),
-                  Tab(
-                    child: Text(
-                      DataConstants.workSiteTabNameList[1],
-                      style: TextStyle(fontFamily: 'cabinBold', fontSize: 16),
+                    unselectedLabelColor: AppColors.grey,
+                    unselectedLabelStyle: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
                     ),
-                  ),
-                  Tab(
-                    child: Text(
-                      DataConstants.workSiteTabNameList[2],
-                      style: TextStyle(fontFamily: 'cabinBold', fontSize: 16),
-                    ),
-                  ),
-                ],
+                    indicatorSize: TabBarIndicatorSize.tab,
+                    // tabs: tabs.map((e) => Tab(text: e.label)).toList(),
+                    tabs: [
+                      Tab(
+                        text:
+                            "${WorkStatus.pending.label} (${viewProvider.pendingWorksList.length})",
+                      ),
+                      Tab(
+                        text:
+                            "${WorkStatus.inProgress.label} (${viewProvider.inProgressWorkList.length})",
+                      ),
+                      Tab(
+                        text:
+                            "${WorkStatus.completed.label} (${viewProvider.completedWorksList.length})",
+                      ),
+                    ],
+                  );
+                },
               ),
             ),
             Expanded(
-              child: TabBarView(
-                controller: tabController,
-                children: [
-                  WorksListTileWidget(tabIndex: 0),
-                  WorksListTileWidget(tabIndex: 1),
-                  WorksListTileWidget(tabIndex: 2),
-                ],
+              child: Consumer<ViewWorkSiteProvider>(
+                builder: (context, provider, _) {
+                  if (provider.isLoading) {
+                    return Center(child: CircularProgressIndicator());
+                  }
+
+                  return TabBarView(
+                    controller: tabController,
+                    children: [
+                      WorksListTileWidget(
+                        tabIndex: 0,
+                        works: provider.pendingWorksList,
+                        workType: WorkStatus.pending.label,
+                      ),
+                      WorksListTileWidget(
+                        tabIndex: 1,
+                        works: provider.inProgressWorkList,
+                        workType: WorkStatus.inProgress.label,
+                      ),
+                      WorksListTileWidget(
+                        tabIndex: 2,
+                        works: provider.completedWorksList,
+                        workType: WorkStatus.completed.label,
+                      ),
+                    ],
+                  );
+                },
               ),
             ),
           ],

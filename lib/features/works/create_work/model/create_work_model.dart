@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:eroll/features/create_staff/model/create_staff_model.dart';
+import 'package:eroll/core/constants/enums.dart';
 
 class CreateWorkModel {
   String workId;
@@ -10,6 +10,7 @@ class CreateWorkModel {
   List<Map<String, dynamic>> assignedEmployeesList;
   DateTime createdAt;
   DateTime? updatedAt;
+  WorkStatus status;
 
   CreateWorkModel({
     required this.workId,
@@ -20,6 +21,7 @@ class CreateWorkModel {
     required this.assignedEmployeesList,
     required this.createdAt,
     this.updatedAt,
+    this.status = WorkStatus.pending,
   });
 
   Map<String, dynamic> toJson() {
@@ -32,6 +34,7 @@ class CreateWorkModel {
       'assignedEmployeeList': assignedEmployeesList,
       'createdAt': createdAt,
       'updatedAt': updatedAt,
+      'status': status.name,
     };
   }
 
@@ -45,16 +48,24 @@ class CreateWorkModel {
           map['endDate'] != null
               ? (map['endDate'] as Timestamp).toDate()
               : null,
-      assignedEmployeesList: List<Map<String, dynamic>>.from(
-        (map['assignedEmployeesList'] as List).map(
-          (e) => Map<String, dynamic>.from(e),
-        ),
-      ),
+      assignedEmployeesList:
+          map['assignedEmployeeList'] != null
+              ? List<Map<String, dynamic>>.from(
+                (map['assignedEmployeeList'] as List).map(
+                  (e) => Map<String, dynamic>.from(e),
+                ),
+              )
+              : [],
+
       createdAt: (map['createdAt'] as Timestamp).toDate(),
       updatedAt:
           map['updatedAt'] != null
               ? (map['updatedAt'] as Timestamp).toDate()
               : null,
+      status: WorkStatus.values.firstWhere(
+        (element) => element.name == map['status'],
+        orElse: () => WorkStatus.pending,
+      ),
     );
   }
 }

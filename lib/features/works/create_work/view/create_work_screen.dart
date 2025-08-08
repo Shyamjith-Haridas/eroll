@@ -3,6 +3,7 @@ import 'package:eroll/core/constants/app_colors.dart';
 import 'package:eroll/core/constants/utility_file.dart';
 import 'package:eroll/features/works/create_work/provider/create_work_provider.dart';
 import 'package:eroll/features/works/create_work/validators/input_validators.dart';
+import 'package:eroll/features/works/work_site/provider/view_work_site_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -25,10 +26,8 @@ class _CreateWorkScreenState extends State<CreateWorkScreen> {
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      Provider.of<CreateWorkProvider>(
-        context,
-        listen: false,
-      ).fetchStaffs(context);
+      final provider = Provider.of<CreateWorkProvider>(context, listen: false);
+      provider.fetchStaffs(context);
     });
   }
 
@@ -205,6 +204,7 @@ class _CreateWorkScreenState extends State<CreateWorkScreen> {
 
                           await provider.createWork(
                             workSiteName: workSiteName,
+                            workDescription: description,
                             startDate: provider.startDate!,
                             teamMembers: provider.selectedTeamMember,
                           );
@@ -214,7 +214,12 @@ class _CreateWorkScreenState extends State<CreateWorkScreen> {
                             'Work created successfully',
                             context,
                           );
-                          Navigator.pop(context);
+
+                          await Provider.of<ViewWorkSiteProvider>(
+                            context,
+                            listen: false,
+                          ).fetchCreatedWorks();
+                          Navigator.pop(context, true);
                         },
                         isLoading: provider.isLoading,
                       ),
