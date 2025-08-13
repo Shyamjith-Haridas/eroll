@@ -44,13 +44,13 @@ class _CreateStaffScreenState extends State<CreateStaffScreen> {
   void _populateFieldsIfEditing() {
     if (widget.isEditMode && widget.staffData != null) {
       try {
-        final staff = widget.staffData!;
+        final staff = widget.staffData;
 
-        nameController.text = staff.name ?? '';
-        mobileController.text = staff.mobile ?? '';
-        selectedValue = staff.empType;
+        nameController.text = staff?.name ?? '';
+        mobileController.text = staff?.mobile ?? '';
+        selectedValue = staff?.empType;
 
-        log('Edit mode - populated fields for: ${staff.name}');
+        log('Edit mode - populated fields for: ${staff?.name}');
       } catch (e) {
         log('Error populating fields: $e');
         // Reset to empty values on error

@@ -5,6 +5,7 @@ import 'package:eroll/features/create_staff/views/create_staff_screen.dart';
 import 'package:eroll/features/payroll/add_salary/add_salary_screen.dart';
 import 'package:eroll/features/payroll/monthly_ledger_report/view/monthly_ledger_report.dart';
 import 'package:eroll/features/settings/view/settings_screen.dart';
+import 'package:eroll/features/works/create_work/model/create_work_model.dart';
 import 'package:eroll/features/works/create_work/view/create_work_screen.dart';
 import 'package:eroll/features/home/view/home_screen.dart';
 import 'package:eroll/features/leave/staff_leave_screen.dart';
@@ -49,8 +50,9 @@ class AppRouteConfig {
         return MaterialPageRoute(builder: (context) => CreateWorkScreen());
 
       case AppRouteNames.updateWorksScreen:
+        final modelArgs = settings.arguments as CreateWorkModel;
         return MaterialPageRoute(
-          builder: (context) => UpdateWorkStatusScreen(),
+          builder: (context) => UpdateWorkStatusScreen(workModel: modelArgs),
         );
 
       case AppRouteNames.staffsScreen:

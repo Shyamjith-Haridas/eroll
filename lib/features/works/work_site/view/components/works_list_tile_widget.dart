@@ -62,7 +62,11 @@ class WorksListTileWidget extends StatelessWidget {
 
         return GestureDetector(
           onTap: () {
-            Navigator.pushNamed(context, AppRouteNames.updateWorksScreen);
+            Navigator.pushNamed(
+              context,
+              AppRouteNames.updateWorksScreen,
+              arguments: work,
+            );
           },
           child: Container(
             width: double.infinity,

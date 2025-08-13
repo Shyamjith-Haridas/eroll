@@ -210,16 +210,22 @@ class _CreateWorkScreenState extends State<CreateWorkScreen> {
                           );
 
                           if (!mounted) return;
-                          UtilityFile.showSnackBar(
-                            'Work created successfully',
-                            context,
-                          );
 
-                          await Provider.of<ViewWorkSiteProvider>(
-                            context,
-                            listen: false,
-                          ).fetchCreatedWorks();
-                          Navigator.pop(context, true);
+                          WidgetsBinding.instance.addPostFrameCallback((
+                            _,
+                          ) async {
+                            UtilityFile.showSnackBar(
+                              'Work created successfully',
+                              context,
+                            );
+
+                            Navigator.pop(context, true);
+
+                            await Provider.of<ViewWorkSiteProvider>(
+                              context,
+                              listen: false,
+                            ).fetchCreatedWorks();
+                          });
                         },
                         isLoading: provider.isLoading,
                       ),

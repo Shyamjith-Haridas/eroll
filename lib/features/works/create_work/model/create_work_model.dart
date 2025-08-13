@@ -11,6 +11,7 @@ class CreateWorkModel {
   DateTime createdAt;
   DateTime? updatedAt;
   WorkStatus status;
+  bool isWorkCompleted;
 
   CreateWorkModel({
     required this.workId,
@@ -22,6 +23,7 @@ class CreateWorkModel {
     required this.createdAt,
     this.updatedAt,
     this.status = WorkStatus.pending,
+    this.isWorkCompleted = false,
   });
 
   Map<String, dynamic> toJson() {
@@ -35,6 +37,7 @@ class CreateWorkModel {
       'createdAt': createdAt,
       'updatedAt': updatedAt,
       'status': status.name,
+      'isWorkCompleted': isWorkCompleted,
     };
   }
 
@@ -66,6 +69,7 @@ class CreateWorkModel {
         (element) => element.name == map['status'],
         orElse: () => WorkStatus.pending,
       ),
+      isWorkCompleted: map['isWorkCompleted'],
     );
   }
 }

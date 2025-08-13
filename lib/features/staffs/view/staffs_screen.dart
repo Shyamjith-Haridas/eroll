@@ -22,10 +22,10 @@ class _StaffsScreenState extends State<StaffsScreen> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(
-      () =>
-          Provider.of<ViewStaffProvider>(context, listen: false).fetchStaffs(),
-    );
+    Future.microtask(() {
+      if (!mounted) return;
+      context.read<ViewStaffProvider>().fetchStaffs();
+    });
   }
 
   @override
@@ -152,6 +152,7 @@ class _StaffsScreenState extends State<StaffsScreen> {
                               '${staffs.name} deleted',
                               context,
                             );
+                            //todo: find the appropriate solution for this
                           }
                         },
                         child: Icon(

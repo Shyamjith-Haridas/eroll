@@ -83,6 +83,7 @@ class _WorksSiteScreenState extends State<WorksSiteScreen>
                       fontWeight: FontWeight.w500,
                     ),
                     indicatorSize: TabBarIndicatorSize.tab,
+
                     // tabs: tabs.map((e) => Tab(text: e.label)).toList(),
                     tabs: [
                       Tab(

@@ -11,7 +11,7 @@ import '../model/create_work_model.dart';
 class CreateWorkProvider extends ChangeNotifier {
   bool _isLoading = false;
   List<CreateStaffModel> _staffsList = [];
-  List<CreateStaffModel> _selectedTeamMember = [];
+  final List<CreateStaffModel> _selectedTeamMember = [];
   DateTime? _startDate;
 
   bool get isLoading => _isLoading;
@@ -46,10 +46,7 @@ class CreateWorkProvider extends ChangeNotifier {
       final firebase = FirebaseFirestore.instance.collection('works');
       final docRef = firebase.doc();
 
-      final assignedEmployees =
-          teamMembers.map((e) {
-            return {'staffId': e.staffId, 'name': e.name};
-          }).toList();
+      final assignedEmployees = teamMembers.map((e) => e.toMap()).toList();
 
       final work = CreateWorkModel(
         workId: docRef.id,
